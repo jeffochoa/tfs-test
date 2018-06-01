@@ -44,7 +44,19 @@ class ProductController extends Controller
             // 'image' => 'image'
         ]);
 
-        auth()->user()->products()->create($request->except('_token'));
+        $file = $request->file("image");
+
+        // Armo un nombre único para este archivo
+        $name = str_slug($request->name) . "_" . time() . '.' . $file->extension();
+
+        $path = $file->storePubliclyAs("images", $name); 
+
+        auth()->user()->products()->create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image' => $path
+        ]);
 
         return redirect()->to('/product')->with('message', 'Product created');
     }
@@ -55,9 +67,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        return view('show-product', ['product' => $product]);
     }
 
     /**

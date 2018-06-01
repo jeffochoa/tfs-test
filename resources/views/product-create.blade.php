@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <form method="POST" action="/product" class="col-sm-8 col-sm-offset-2">
+    <form method="POST" action="/product" enctype="multipart/form-data" class="col-sm-8 col-sm-offset-2">
         {{ csrf_field() }}
 
 
