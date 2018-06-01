@@ -19,12 +19,17 @@
                     <td>{{ $product->price / 100 }} $</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="/product/{{$product->id}}/edit">edit</a>
+                         
+                        
+
                         <form method="POST" action="/product/{{$product->id}}">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" href="/product/{{$product->id}}/edit">delete</button>
                         </form>
-                    </td>
+
+
+                   </td>
                 </tr>
                 @endforeach
             </tbody>

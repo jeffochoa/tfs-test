@@ -40,7 +40,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required',
+            'price' => 'required|int',
             // 'image' => 'image'
         ]);
 
@@ -85,13 +85,14 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required',
+            'price' => 'required|int',
             // 'image' => 'image'
         ]);
 
         $product->update($request->except('_token'));
 
-        return redirect()->to('product')->with('message', 'Product updated');
+        return redirect()->to('product')
+            ->with('message', 'Product updated');
     }
 
     /**
